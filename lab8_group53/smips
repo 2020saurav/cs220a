@@ -1,0 +1,181 @@
+#!/bin/bash
+#/*
+#
+#Copyright (C) 2012 Muralidaran Vijayaraghavan <vmurali@csail.mit.edu>
+#Copyright (C) 2014 Amey Karkare <karkare@cse.iitk.ac.in>
+#
+#Permission is hereby granted, free of charge, to any person
+#obtaining a copy of this software and associated
+#documentation files (the "Software"), to deal in the
+#Software without restriction, including without limitation
+#the rights to use, copy, modify, merge, publish, distribute,
+#sublicense, and/or sell copies of the Software, and to
+#permit persons to whom the Software is furnished to do so,
+#subject to the following conditions:
+#
+#The above copyright notice and this permission notice shall
+#be included in all copies or substantial portions of the
+#Software.
+#
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+#KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+#WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+#PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+#OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+#OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+#OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+#SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#
+#*/
+#
+#/* 
+#Change log:
+# Jan 2014: Adapted to use for Computer Organisation course at IIT 
+#           Kanpur by Amey Karkare
+#
+#*/
+#
+
+CS220_HOME=/users/course/cs220/Labs/LABHOME
+
+# C Compiler
+CC="$CS220_HOME/compiler/bin/smips-gcc -B$CS220_HOME/compiler/lib/gcc-lib/smips/egcs-2.90.29/ -B$CS220_HOME/compiler/bin/ -B$CS220_HOME/compiler/smips/bin/ -G 0"
+CDUMP=$CS220_HOME/compiler/bin/smips-objdump
+
+if [[ -z $CS220_HOME ]] ; then
+  echo "CS220_HOME undefined. Please define it"
+  exit
+fi
+
+function usage_and_exit() {
+    echo "Usage: $0 [-c|--compile <all|path to program>] [-r|--run] [-x|--clean] [-s|--skip]" >&2 
+    exit 1
+}
+
+TEMP=`getopt -o c:rt:xsh --long compile:,run,target:,clean,skip,help \
+     -n 'smips' -- "$@"`
+
+if [ $? != 0 ] ; then usage_and_exit ; fi
+
+# Note the quotes around `$TEMP': they are essential!
+eval set -- "$TEMP"
+
+COMPILE=""
+RUN=0
+CLEAN=0
+TARGET=bsim
+DECOUPLE=0
+FPGA=0
+SKIPBUILD=0
+
+while true ; do
+  case "$1" in
+    -c|--compile)  COMPILE="$2" ; shift 2 ;;
+    -r|--run)      RUN=1 ; shift ;;
+    -x|--clean)    CLEAN=1 ; shift ;;
+    -s|--skip)     SKIPBUILD=1 ; shift ;;
+    --) shift ; break ;;
+    *) usage_and_exit; exit 1 ;; 
+  esac
+done
+
+if [[ $CLEAN == 1 ]] ; then
+  rm -rf build
+  exit 0
+fi
+
+TARGET=bsim
+
+if [[ $COMPILE == all ]] ; then
+  COMPILE=`find $CS220_HOME/programs/src/ -maxdepth 1 -mindepth 1`
+fi
+
+function wrappedBuild {
+  if [[ $SKIPBUILD == 0 ]] ; then
+    echo ""
+    echo "Building $1"
+    mkdir -p build/bdir
+    mkdir -p build/$TARGET
+
+    bsc -u -sim -aggressive-conditions \
+	-simdir build/bdir \
+	-info-dir build/bdir \
+	-bdir build/bdir \
+	TestBench.bsv
+
+    if [[ $? != 0 ]] ; then
+      exit
+    fi
+
+    bsc -u -sim -e mkTestBench \
+	-bdir build/bdir \
+	-info-dir build/bdir \
+	-simdir build/bdir \
+	-o build/sim build/bdir/*.ba
+
+    if [[ $? != 0 ]] ; then
+      exit
+    fi
+  fi
+}
+
+function wrappedCompile {
+  echo ""
+  echo "Compiling $1"
+  newprog=`basename $1`
+  build=build/$newprog
+  mkdir -p $build
+  $CC -static -O2 -nostdlib -nostartfiles -Wa,-O0 -Wl,-Ttext=0x1000,-e__start \
+      $CS220_HOME/programs/lib/start.c \
+      $CS220_HOME/programs/lib/print.c \
+      $CS220_HOME/programs/lib/cop.c $1$2 \
+      -o $build/a.out
+  $CDUMP --disassemble-all --disassemble-zeroes $build/a.out > $build/out.dump
+  $CS220_HOME/objdump2vmh.pl $build/out.dump $build/out.vmh
+  if [[ $RUN == 1 ]] ; then
+    wrappedRun $newprog
+  fi
+}
+
+function fullCompile {
+  for prog in $COMPILE ; do
+    prog=`readlink -f $prog`
+    if [[ `basename $prog` !=  .svn ]] ; then
+        if [[ `basename $prog` != assembly ]] ; then
+            wrappedCompile $prog '/*.c'
+        else
+            for asm in $prog/*.S ; do
+                wrappedCompile $prog/`basename $asm`
+            done
+        fi
+    fi
+  done
+}
+
+function wrappedRun {
+  echo "Running $1"
+  cd build; ln -sf ./$1/out.vmh ./memory.vmh; cd ..
+  mkdir -p build/$1
+  pushd . > /dev/null
+  pkill -9 bluetcl >& /dev/null
+  if [[ $FPGA == 0 ]] ; then
+    cd build
+    if [[ $DECOUPLE == 1 ]] ; then
+      ./sim > ./$0/simOut &
+    else
+      ./sim > ./$1/simOut
+    fi
+  else
+    cd build/fpga
+    impact -batch mkBridge_jtag.cmd
+  fi
+  if [[ $DECOUPLE == 1 ]] ; then
+    sleep 1
+    cd build/$TARGET
+    ./run > ./$1/runOut
+  fi
+  popd > /dev/null
+}
+
+wrappedBuild
+fullCompile

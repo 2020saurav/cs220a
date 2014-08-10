@@ -1,0 +1,4 @@
+
+Building 
+checking package dependencies
+compiling ./AddrPredict.bsv

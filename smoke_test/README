@@ -1,0 +1,22 @@
+This directory contains a "smoke test" for bsc installation, which can be run using the
+following targets
+
+1) make smoke_test
+    Runs bsc and checks for correct operation and a valid simulator.
+    A simulator may be specified by setting one of the following
+    variable either on the command line or in your environment;
+    iverilog is the default simulator.
+    vcsi=1,   vcs=1,   ncverilog=1,   ncsim=1,   or cver=1
+
+2) make smoke_test_bluesim
+    Runs bsc and a base smoke test of Bluespec's Bluesim simulator installation.
+
+For debug the following target may be helpful
+
+3) make debug_license
+   Runs the FlexLM utility lmdiag for the Bluespec license BCOMP and
+   BSIM.
+
+
+Question, please contact
+support@bluespec.com

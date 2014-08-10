@@ -1,0 +1,34 @@
+Write your answers to the discussion questions asked in the lab handout in this file.
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+We see that the function getIdx is defined as:
+
+function CacheIndex getIdx(Addr addr) = truncate(addr >> 2);
+
+That is, it just truncates the addresses to construct the hashing function.
+A better hashing function would allow lesser number of collisions to take place on average.
+This would improve the performance in most of the cases, because if there is a collision in the cache memory,
+then we have to search from the main memory. This defeats the purpose of caching (where we store frequently used data
+in the cache memory for rapid access, rather than going to the main memory)
+
+Randomizing the function (as mentioned - by bit switching or by multiplying by a prime) helps in lesser collisions. However,
+some functions that may play an adversarial role might overload the function of the cache, thus in effect increasing the time
+and cycle consumption.
+
+Randomizing will reduce the chance of adversarial mischief and hence it is advisable. A new task might be the calculation of primes
+but that can be calculated with any associated ALU of the cache or the processor. However, there may be greater cycles included in the 
+ALU of the cache, but independence with the processor clock need not affect the cycles, which will on the whole, keep decreasing.
+
+However, it is often seen that the cache memory is very small in size (1024 bits) and hence simple direct hashing with 0 to 1023 bits 
+would cause less chance of collisions than with randomization with prime p. So we may have direct hashing to be somewhat better.
+
+Another problem is that implementing hardware is difficult, changing and implementing complicated hash functions can lead to complicated hardware, which is not advisable.
+
+So we have basically a tradeoff between hardware complications and speed. It is advisable to use the simpler hardware and programming
+i.e. sotware manipulations to get best performance
+
+
+
+

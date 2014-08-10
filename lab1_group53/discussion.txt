@@ -1,0 +1,18 @@
+Write your answers to the discussion questions asked in the lab handout in this file.
+
+-------------------------------------------------------------------------------------
+One bit multiplexer uses OR (1), AND (2), NOT (1), total of 4 gates.
+
+The 32 bit multiplexer is also effectively a (2X1) multiplexer that just selects between two 32 bit numbers by running a for loop over the number of bits in a 32 bit number.
+
+In each iteration of the for loop, we have one multiplexer1 (using 4 gates) being called. Hence, for 32 loops, we have, effectively, used
+4X32 = 128 gates
+
+Generalizing, if we need to use a n-bit multiplexer, we need to run the iteration (each iteration uses 4 gates) n times. Hence, number of gates used :
+4Xn = 4n 
+
+
+
+Ans : 1 bit multiplexer - 4 gates
+      32bit multiplexer - 128 gates
+      n-bit multiplexer - 4n gates.

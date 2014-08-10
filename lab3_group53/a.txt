@@ -1,0 +1,216 @@
+
+Building 
+checking package dependencies
+compiling ./Exec.bsv
+code generation for module_alu starts
+Elaborated module file created: build/bdir/module_alu.ba
+code generation for module_aluBr starts
+Elaborated module file created: build/bdir/module_aluBr.ba
+code generation for module_brAddrCalc starts
+Elaborated module file created: build/bdir/module_brAddrCalc.ba
+code generation for module_exec starts
+Elaborated module file created: build/bdir/module_exec.ba
+compiling ./RFile.bsv
+code generation for mkRFile starts
+Elaborated module file created: build/bdir/mkRFile.ba
+compiling ./Proc.bsv
+code generation for mkProc starts
+Elaborated module file created: build/bdir/mkProc.ba
+compiling TestBench.bsv
+code generation for mkTestBench starts
+Elaborated module file created: build/bdir/mkTestBench.ba
+All packages are up to date.
+Bluesim object created: build/bdir/mkTestBench.{h,o}
+Bluesim object created: build/bdir/mkCop.{h,o}
+Bluesim object created: build/bdir/mkDMemory.{h,o}
+Bluesim object created: build/bdir/mkIMemory.{h,o}
+Bluesim object created: build/bdir/mkProc.{h,o}
+Bluesim object created: build/bdir/mkRFile.{h,o}
+Bluesim object created: build/bdir/module_alu.{h,o}
+Bluesim object created: build/bdir/module_aluBr.{h,o}
+Bluesim object created: build/bdir/module_brAddrCalc.{h,o}
+Bluesim object created: build/bdir/module_decode.{h,o}
+Bluesim object created: build/bdir/module_exec.{h,o}
+Bluesim object created: build/bdir/schedule.{h,o}
+Simulation shared library created: build/sim.so
+Simulation executable created: build/sim
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/towers
+Running towers
+Verifying towers: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/multiply
+Running multiply
+Verifying multiply: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/qsort
+Running qsort
+Verifying qsort: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/vvadd
+Running vvadd
+Verifying vvadd: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/filters
+Running filters
+Verifying filters: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv1_addiu.S
+Running smipsv1_addiu.S
+Verifying smipsv1_addiu.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv1_bne.S
+Running smipsv1_bne.S
+Verifying smipsv1_bne.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv1_lw.S
+Running smipsv1_lw.S
+Verifying smipsv1_lw.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv1_simple.S
+Running smipsv1_simple.S
+Verifying smipsv1_simple.S: PASSED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv1_sw.S
+Running smipsv1_sw.S
+Verifying smipsv1_sw.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_addiu.S
+Running smipsv2_addiu.S
+Verifying smipsv2_addiu.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_addu.S
+Running smipsv2_addu.S
+Verifying smipsv2_addu.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_andi.S
+Running smipsv2_andi.S
+Verifying smipsv2_andi.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_and.S
+Running smipsv2_and.S
+Verifying smipsv2_and.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_beq.S
+Running smipsv2_beq.S
+Verifying smipsv2_beq.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_bgez.S
+Running smipsv2_bgez.S
+Verifying smipsv2_bgez.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_bgtz.S
+Running smipsv2_bgtz.S
+Verifying smipsv2_bgtz.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_blez.S
+Running smipsv2_blez.S
+Verifying smipsv2_blez.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_bltz.S
+Running smipsv2_bltz.S
+Verifying smipsv2_bltz.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_bne.S
+Running smipsv2_bne.S
+Verifying smipsv2_bne.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_jalr.S
+Running smipsv2_jalr.S
+Verifying smipsv2_jalr.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_jal.S
+Running smipsv2_jal.S
+Verifying smipsv2_jal.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_jr.S
+Running smipsv2_jr.S
+Verifying smipsv2_jr.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_j.S
+Running smipsv2_j.S
+Verifying smipsv2_j.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_lui.S
+Running smipsv2_lui.S
+Verifying smipsv2_lui.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_lw.S
+Running smipsv2_lw.S
+Verifying smipsv2_lw.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_nor.S
+Running smipsv2_nor.S
+Verifying smipsv2_nor.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_ori.S
+Running smipsv2_ori.S
+Verifying smipsv2_ori.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_or.S
+Running smipsv2_or.S
+Verifying smipsv2_or.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_simple.S
+Running smipsv2_simple.S
+Verifying smipsv2_simple.S: PASSED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_sll.S
+Running smipsv2_sll.S
+Verifying smipsv2_sll.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_sllv.S
+Running smipsv2_sllv.S
+Verifying smipsv2_sllv.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_slti.S
+Running smipsv2_slti.S
+Verifying smipsv2_slti.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_sltiu.S
+Running smipsv2_sltiu.S
+Verifying smipsv2_sltiu.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_slt.S
+Running smipsv2_slt.S
+Verifying smipsv2_slt.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_sltu.S
+Running smipsv2_sltu.S
+Verifying smipsv2_sltu.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_sra.S
+Running smipsv2_sra.S
+Verifying smipsv2_sra.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_srav.S
+Running smipsv2_srav.S
+Verifying smipsv2_srav.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_srl.S
+Running smipsv2_srl.S
+Verifying smipsv2_srl.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_srlv.S
+Running smipsv2_srlv.S
+Verifying smipsv2_srlv.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_subu.S
+Running smipsv2_subu.S
+Verifying smipsv2_subu.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_sw.S
+Running smipsv2_sw.S
+Verifying smipsv2_sw.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_xori.S
+Running smipsv2_xori.S
+Verifying smipsv2_xori.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/assembly/smipsv2_xor.S
+Running smipsv2_xor.S
+Verifying smipsv2_xor.S: FAILED
+
+Compiling /users/course/cs220/Labs/LABHOME/programs/src/median
+Running median
+Verifying median: FAILED

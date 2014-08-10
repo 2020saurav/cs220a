@@ -1,0 +1,119 @@
+Write your answers to the discussion questions asked in the lab handout in this file.
+
+-------------------------------------------------------------------------------------
+Ans 1:
+
+We implemented first the NoBranchPredictor which was there by default (i.e. no prediction) having 0 branch predictors, and having one branch predictor (having only 1 - the NAP - Next Address Predictor and not using the Direction Predictor). We compared it with the 2 branch predictor implementation with 2 bit predictor.
+
+Towers 
+Instructions	: 9907 
+Cycles :
+No Branch Predictor	 : 19835
+One Branch Predictor	 : 17496
+Two Branch Predictor	 : 17595
+
+Multiply
+Instructions 	: 21098
+Cycles 	:
+No Branch Predictor	: 64395
+One Branch Predictor	: 70335
+Two Branch Predictor	: 44222
+
+Qsort
+Instructions	: 21626
+Cycles :
+No Branch Predictor	: 56650
+One Branch Predictor	: 56335
+Two Branch Predictor	: 52631
+
+vvadd
+Instructions	: 3018
+Cycles :
+No Branch Predictor	: 6937
+One Branch Predictor	: 6937
+Two Branch Predictor	: 5155
+
+filters
+Instructions 	: 71225
+Cycles	:
+No Branch Predictor	: 221104
+One Branch Predictor	: 240315
+Two Branch Predictor	: 142679
+
+Median
+Instructions : 6871
+Cycls :
+No Branch Predictor	: 17343
+One Branch Predictor	: 17411
+Two Branch Predictor	: 16417
+
+We see that there is a noticeable difference between the three in many functions like quick sort and multiply. Notice in multiply, the two branch predictor becomes a lot more efficient taking lesser number of cycles by about 20173 cycles, which is significant. This is because multiplication involves a large number of loops which have similar branch redirections; these are efficiently handled by our 2 bit saturation counter based direction predictor, thereby increasing throughput and decreasing cycles.
+
+However in the one branch predictor, using only address predictor, i,e BTB, and not direction predictor, we only predict the next address and sometimes we get poor cycle runs. 
+
+For example in the Multiply module implemented above, the one branch does worse than pc+4 (no prediction) because if taken is one suppose, then in a multiplicand or multiplier having random 1 or 0 bits, we have pc+4 giving correct address 50% of the time expectedly, but BTB will jump, for false, it will go true and for true, give false, defeating the purpose of the counter.
+
+-------------------------------------------------------------------------------------------------
+
+Ans 2: 
+
+Here we compare the three saturation counters of 1 bit, 2 bit and 3 bit respectively.
+
+Towers 
+Instructions	: 9907 
+Cycles :
+1 bit Counter	 : 17595
+2 bit Counter	 : 17595
+3 bit Counter	 : 17529
+
+Multiply
+Instructions 	: 21098
+Cycles 	:
+1 bit Counter	: 44724
+2 bit Counter	: 44222
+3 bit Counter	: 44083
+
+Qsort
+Instructions	: 21626
+Cycles :
+1 bit Counter	: 53504
+2 bit Counter	: 52631
+3 bit Counter	: 51910
+
+vvadd
+Instructions	: 3018
+Cycles :
+1 bit Counter	: 5149
+2 bit Counter	: 5155
+3 bit Counter	: 5167
+
+filters
+Instructions 	: 71225
+Cycles	:
+1 bit Counter	: 144700
+2 bit Counter	: 142679
+3 bit Counter	: 142771
+
+Median
+Instructions : 6871
+Cycles :
+1 bit Counter	: 16816
+2 bit Counter	: 16417
+3 bit Counter	: 16408
+
+It is obvious that the saturation counter with more number of bits will give more efficient implementation. The same is seen almost everywhere where branch direction prediction becomes significant, (with many loops) as in multiply. 
+The 2 bit saturation counter exploits the fact that we are ignoring outlying branch redirections and carrying on with the usual branch prediction (taken or not taken) by assigning weakly taken and strongly taken values. 
+A 1 bit counter cannot tolerate an unusual direction taken one time and mispredicts the next branches.
+A 3 bit counter shows even more tolerance than 2 bit and needs three consecutive misdirections to cause it to change its prediction (we can name maybe weakly, moderately and strongly taken or not taken!).
+This is aptly displayed in the above data.
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+Write your answers to the discussion questions asked in the lab handout in this file.
+
+-------------------------------------------------------------------------------------
+Ans.1>
+
+Advantages : The main advantage of using booth multiplication is that it reduces the total number of partial product. The total number of calculations that take place may reduce due to the algorithms as we map a string of contiguous 1's into one single calculating step (we ignore 00 or 11 while running over the product register). This reduces running time and processing time.
+
+Disadvantages : Since the registers used, in excess to the product register are of size 2*n + 1, more hardware (area) is required and thus requires more power consumption.
+
+
+Ans.2>
+
+It seems that the Fifo structure is modifying the queue-like-structure from two different sides. Enqueue deals with one end of the queue and dequeue with the other. Hence,when they are operated in two different rules (enq and deq), the changes made by them are not conflicting as they do not try to write at the same place and at the same clock cycle. Hence, it does not throw up any error.
+
+
